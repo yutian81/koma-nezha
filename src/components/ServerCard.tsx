@@ -192,12 +192,8 @@ export default function ServerCard({ now, serverInfo }: { now: number; serverInf
           </div>
         </div>
       </section>
-      <span className="mb-2 block w-full text-sm font-bold text-red-500">服务器已离线</span>
-      <div
-        className={cn("flex items-center gap-2 lg:hidden", {
-          "lg:flex": fixedTopServerName,
-        })}
-      >
+      <div className="mb-2 flex flex-col items-start gap-1 w-full lg:w-auto">
+        <span className="text-sm font-bold text-red-500">服务器已离线</span>
         {parsedData?.billingDataMod && <BillingInfo parsedData={parsedData} />}
       </div>
       {parsedData?.planDataMod && <PlanInfo parsedData={parsedData} />}
