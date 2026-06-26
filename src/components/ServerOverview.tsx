@@ -3,6 +3,7 @@ import { useStatus } from "@/hooks/use-status"
 import { formatBytes } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from "@heroicons/react/20/solid"
+import { ArrowUpDown, CheckCircle, Server, XCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 type ServerOverviewProps = {
@@ -40,7 +41,7 @@ export default function ServerOverview({ online, offline, total, up, down, upSpe
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("serverOverview.totalServers")}</p>
+              <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><Server className="size-4" />{t("serverOverview.totalServers")}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
@@ -66,7 +67,7 @@ export default function ServerOverview({ online, offline, total, up, down, upSpe
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("serverOverview.onlineServers")}</p>
+              <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><CheckCircle className="size-4 text-green-500" />{t("serverOverview.onlineServers")}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
@@ -94,7 +95,7 @@ export default function ServerOverview({ online, offline, total, up, down, upSpe
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base">{t("serverOverview.offlineServers")}</p>
+              <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><XCircle className="size-4 text-red-500" />{t("serverOverview.offlineServers")}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
@@ -113,7 +114,7 @@ export default function ServerOverview({ online, offline, total, up, down, upSpe
           <CardContent className="flex h-full items-center relative px-6 py-3">
             <section className="flex flex-col gap-1 w-full">
               <div className="flex items-center w-full justify-between">
-                <p className="text-sm font-medium md:text-base">{t("serverOverview.network")}</p>
+                <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><ArrowUpDown className="size-4 text-purple-500" />{t("serverOverview.network")}</p>
               </div>
               <section className="flex items-start flex-row z-10 pr-0 gap-1">
                 <p className="sm:text-[12px] text-[10px] text-blue-800 dark:text-blue-400   text-nowrap font-medium">↑{formatBytes(up)}</p>

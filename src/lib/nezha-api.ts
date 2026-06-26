@@ -1,10 +1,7 @@
 import { SharedClient } from "@/hooks/use-rpc2"
 import { LoginUserResponse, MonitorResponse, ServerGroupResponse, ServiceData, ServiceResponse, SettingResponse, NezhaMonitor } from "@/types/nezha-api"
 import { DateTime } from "luxon"
-
 import { getKomariNodes, uuidToNumber } from "./utils"
-
-//let lastestRefreshTokenAt = 0
 
 export const fetchServerGroup = async (): Promise<ServerGroupResponse> => {
   const kmNodes: Record<string, any> = await getKomariNodes()
@@ -13,7 +10,7 @@ export const fetchServerGroup = async (): Promise<ServerGroupResponse> => {
     throw new Error(kmNodes.error)
   }
   // extract groups
-  let groups: string[] = []
+  const groups: string[] = []
   Object.entries(kmNodes).forEach(([_, value]) => {
     if (value.group && !groups.includes(value.group)) {
       groups.push(value.group)
@@ -224,7 +221,7 @@ export const fetchService = async (): Promise<ServiceResponse> => {
   const kmNodes: Record<string, any> = await getKomariNodes()
   const uuids = Object.keys(kmNodes || {})
 
-  let allTasks: any[] = []
+  const allTasks: any[] = []
   let allRecords: any[] = []
   const seenTaskIds = new Set<number>()
 
@@ -281,7 +278,6 @@ export const fetchService = async (): Promise<ServiceResponse> => {
     }
 
     const delay = delaySum.map((s, i) => (delayCnt[i] > 0 ? s / delayCnt[i] : 0))
-
     const totalUp = up.reduce((a, b) => a + b, 0)
     const totalDown = down.reduce((a, b) => a + b, 0)
 
@@ -331,6 +327,16 @@ export const fetchSetting = async (): Promise<SettingResponse> => {
     for (const [key, value] of Object.entries(themeSettings)) {
       ;(window as unknown as Record<string, unknown>)[key] = value
     }
+  }
+  // CustomBackgroundImage 留空则使用默认背景图
+  const DEFAULT_BG = "https://pan.811520.xyz/icon/img-dark.webp"
+  if (!(window as unknown as Record<string, unknown>).CustomBackgroundImage) {
+    ;(window as unknown as Record<string, unknown>).CustomBackgroundImage = DEFAULT_BG
+  }
+  // CustomLightBackgroundImage 留空则使用默认明亮背景图
+  const DEFAULT_LIGHT_BG = "https://pan.811520.xyz/icon/bg_light.webp"
+  if (!(window as unknown as Record<string, unknown>).CustomLightBackgroundImage) {
+    ;(window as unknown as Record<string, unknown>).CustomLightBackgroundImage = DEFAULT_LIGHT_BG
   }
   const km_version = await SharedClient().call("common:getVersion")
   const km_data: SettingResponse = {

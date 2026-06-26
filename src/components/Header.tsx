@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import NumberFlow, { NumberFlowGroup } from "@number-flow/react"
 import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, m } from "framer-motion"
-import { ImageMinus, LogIn } from "lucide-react"
+import { ImageMinus, Settings } from "lucide-react"
 import { DateTime } from "luxon"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -123,7 +123,7 @@ function Header() {
               })}
               title={t("login")}
             >
-              <LogIn />
+              <Settings className="w-4 h-4" />
             </Button>
           </a>
         </section>

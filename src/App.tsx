@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-
 import { DashCommand } from "./components/DashCommand"
 import ErrorBoundary from "./components/ErrorBoundary"
 import Footer from "./components/Footer"
@@ -69,16 +68,26 @@ const MainApp: React.FC = () => {
   }
 
   const customMobileBackgroundImage = window.CustomMobileBackgroundImage !== "" ? window.CustomMobileBackgroundImage : undefined
+  const customLightBackgroundImage = (window.CustomLightBackgroundImage as string) || undefined
 
   return (
     <ErrorBoundary>
-      {/* 固定定位的背景层 */}
+      {/* 深色模式背景层 */}
       {customBackgroundImage && (
         <div
-          className={cn("fixed inset-0 z-0 bg-cover min-h-lvh bg-no-repeat bg-center dark:brightness-75", {
-            "hidden sm:block": customMobileBackgroundImage,
+          className={cn("fixed inset-0 z-0 bg-cover min-h-lvh bg-no-repeat bg-center hidden dark:block", {
+            "dark:hidden": customMobileBackgroundImage,
           })}
           style={{ backgroundImage: `url(${customBackgroundImage})` }}
+        />
+      )}
+      {/* 明亮模式背景层 */}
+      {customLightBackgroundImage && (
+        <div
+          className={cn("fixed inset-0 z-0 bg-cover min-h-lvh bg-no-repeat bg-center block dark:hidden", {
+            "hidden sm:block": customMobileBackgroundImage,
+          })}
+          style={{ backgroundImage: `url(${customLightBackgroundImage})` }}
         />
       )}
       {customMobileBackgroundImage && (

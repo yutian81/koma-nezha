@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-
 import { Progress } from "./ui/progress"
 
 export default function RemainPercentBar({ value, days, className }: { value: number; days?: number; className?: string }) {
@@ -7,7 +6,7 @@ export default function RemainPercentBar({ value, days, className }: { value: nu
   let colorClass = "bg-green-500"
   if (days !== undefined) {
     if (days <= 30) colorClass = "bg-red-500"
-    else if (days <= 60) colorClass = "bg-yellow-500"
+    else if (days <= 90) colorClass = "bg-yellow-500"
   } else {
     // 兜底：用百分比判断
     if (value < 30) colorClass = "bg-red-500"
