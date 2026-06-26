@@ -19,7 +19,7 @@ export default function RemainPercentBar({ value, days, className }: { value: nu
       aria-labelledby={"Server Usage Bar"}
       value={value}
       indicatorClassName={colorClass}
-      className={cn("h-[2.5px] rounded-sm", className)}
+      className={cn("h-[3.5px] rounded-sm", className)}
     />
   )
 }

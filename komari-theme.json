@@ -2,7 +2,7 @@
   "name": "Koma-Nezha",
   "short": "Koma-Nezha",
   "description": "Koma-Nezha Theme for Komari Monitor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "BITJEBE",
   "url": "https://github.com/yutian81/koma-nezha",
   "preview": "preview.png",
@@ -38,7 +38,7 @@
         "key": "CustomLogo",
         "name": "站点Logo",
         "type": "input",
-        "default": "/favicon.ico",
+        "default": "/favicon.png",
         "help": "站点Logo图片URL，显示在左上角和浏览器标签页。"
       },
       {

@@ -34,7 +34,7 @@ function Header() {
   const siteName = settingData?.data?.config?.site_name
 
   // @ts-expect-error CustomLogo is a global variable
-  const customLogo = window.CustomLogo || "/favicon.ico"
+  const customLogo = window.CustomLogo || "/favicon.png"
 
   const customDesc = settingData?.data?.config?.site_desc || (window as any).CustomDesc || "Komari Monitor"
 
