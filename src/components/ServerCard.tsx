@@ -194,7 +194,7 @@ export default function ServerCard({ now, serverInfo }: { now: number; serverInf
       </section>
       <div className="mb-2 flex flex-col items-start gap-1 w-full lg:w-auto">
         <span className="text-sm font-bold text-red-500">服务器已离线</span>
-        {parsedData?.billingDataMod && <BillingInfo parsedData={parsedData} />}
+          {parsedData?.planDataMod && <PlanInfo parsedData={parsedData} />}
       </div>
     </Card>
   )
