@@ -1,4 +1,3 @@
-import AssetSummaryWidget from "@/components/AssetSummaryWidget"
 import GlobalMap from "@/components/GlobalMap"
 import GroupSwitch from "@/components/GroupSwitch"
 import ServerCard from "@/components/ServerCard"
@@ -40,9 +39,7 @@ export default function Servers() {
   const [currentGroup, setCurrentGroup] = useState<string>("All")
 
   const customBackgroundImage = (window.CustomBackgroundImage as string) !== "" ? window.CustomBackgroundImage : undefined
-  const themeSettings = window as unknown as Record<string, unknown>
-  const showVisitorCapsule = themeSettings.ShowVisitorCapsule === true
-  const showAssetCard = themeSettings.ShowAssetCard === true
+  const showVisitorCapsule = (window as unknown as Record<string, unknown>).ShowVisitorCapsule === true
 
   const restoreScrollPosition = () => {
     const savedPosition = sessionStorage.getItem("scrollPosition")
@@ -242,7 +239,6 @@ export default function Servers() {
         downSpeed={downSpeed}
       />
       {showVisitorCapsule && <VisitorCapsuleBar />}
-      {showAssetCard && <AssetSummaryWidget now={nezhaWsData.now} servers={groupFilteredServers} />}
       <div className="flex mt-6 items-center justify-between gap-2 server-overview-controls">
         <section className="flex items-center gap-2 w-full overflow-hidden">
           <button

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import NumberFlow, { NumberFlowGroup } from "@number-flow/react"
 import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, m } from "framer-motion"
-import { ImageMinus, Settings } from "lucide-react"
+import { ImageMinus, Settings, CircleDollarSign } from "lucide-react"
 import { DateTime } from "luxon"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -17,7 +17,13 @@ import { useNavigate } from "react-router-dom"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { SearchButton } from "./SearchButton"
 import { LoadingSpinner } from "./loading/Loader"
+import AssetSummaryWidget from "./AssetSummaryWidget"
 import { Button } from "./ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
 
 function Header() {
   const { t } = useTranslation()
@@ -71,6 +77,9 @@ function Header() {
 
   const customBackgroundImage = backgroundImage
 
+  const { lastMessage } = useWebSocketContext()
+  const showAssetButton = (window as unknown as Record<string, unknown>).ShowAssetButton !== false
+
   return (
     <div className="mx-auto w-full max-w-5xl">
       <section className="flex items-center justify-between header-top">
@@ -114,6 +123,27 @@ function Header() {
               <ImageMinus className="w-4 h-4" />
             </Button>
           )}
+          {showAssetButton && lastMessage && (() => {
+            const wsData = JSON.parse(lastMessage.data)
+            return (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={cn("rounded-full px-[9px] bg-white dark:bg-black", {
+                      "bg-white/70 dark:bg-black/70": customBackgroundImage,
+                    })}
+                  >
+                    <CircleDollarSign className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" sideOffset={8} className="max-h-[70vh] overflow-y-auto">
+                  <AssetSummaryWidget now={wsData.now} servers={wsData.servers} />
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
+          })()}
           <a href="/admin" target="_blank">
             <Button
               variant="outline"

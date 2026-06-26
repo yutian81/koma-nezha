@@ -15,7 +15,7 @@ export function ModeToggle() {
   const customBackgroundImage = (window.CustomBackgroundImage as string) !== "" ? window.CustomBackgroundImage : undefined
 
   const handleSelect = (e: Event, newTheme: Theme) => {
-    e.preventDefault()
+    // e.preventDefault()
     setTheme(newTheme)
   }
 
