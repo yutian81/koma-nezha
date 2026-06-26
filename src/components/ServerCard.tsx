@@ -196,7 +196,6 @@ export default function ServerCard({ now, serverInfo }: { now: number; serverInf
         <span className="text-sm font-bold text-red-500">服务器已离线</span>
         {parsedData?.billingDataMod && <BillingInfo parsedData={parsedData} />}
       </div>
-      {parsedData?.planDataMod && <PlanInfo parsedData={parsedData} />}
     </Card>
   )
 }
