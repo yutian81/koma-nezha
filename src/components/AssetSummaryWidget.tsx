@@ -429,7 +429,7 @@ export default function AssetSummaryWidget({ now, servers, open: openProp, onClo
     <>
       <section
         className={cn(
-          "fixed right-5 top-[70px] z-[1040] flex w-[280px] max-w-[calc(100vw-40px)] max-h-[75vh] flex-col rounded-2xl border border-border bg-card/90 text-card-foreground shadow-2xl backdrop-blur-xl transition max-[576px]:right-5 max-[576px]:w-[calc(100vw-40px)] overflow-y-auto",
+          "fixed right-5 top-[70px] z-[1040] flex w-[280px] max-w-[calc(100vw-40px)] max-h-[80vh] flex-col rounded-2xl border border-border bg-card/90 text-card-foreground shadow-2xl backdrop-blur-xl transition max-[576px]:right-5 max-[576px]:w-[calc(100vw-40px)] overflow-y-auto",
           isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0",
         )}
       >
