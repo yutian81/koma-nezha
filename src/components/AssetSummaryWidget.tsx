@@ -429,7 +429,7 @@ export default function AssetSummaryWidget({ now, servers, open: openProp, onClo
     <>
       <section
         className={cn(
-          "fixed right-5 top-[70px] z-[1040] flex w-[280px] max-w-[calc(100vw-40px)] flex-col rounded-2xl border border-border bg-card/90 text-card-foreground shadow-2xl backdrop-blur-xl transition max-[576px]:right-5 max-[576px]:w-[calc(100vw-40px)]",
+          "fixed right-5 top-[70px] z-[1040] flex w-[280px] max-w-[calc(100vw-40px)] max-h-[75vh] flex-col rounded-2xl border border-border bg-card/90 text-card-foreground shadow-2xl backdrop-blur-xl transition max-[576px]:right-5 max-[576px]:w-[calc(100vw-40px)] overflow-y-auto",
           isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0",
         )}
       >
@@ -458,7 +458,7 @@ export default function AssetSummaryWidget({ now, servers, open: openProp, onClo
 
           <div className="my-1 h-px bg-border" />
 
-          <div className="max-h-[230px] overflow-y-auto pr-1">
+          <div className="pr-1">
             {visibleItems.length > 0 ? (
               visibleItems.map((item) => {
                 const convertedValue = cnyToCurrency(item.remainingCny ?? item.priceCny, targetCurrency, rates)
