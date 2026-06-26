@@ -18,6 +18,8 @@ import { NezhaServer } from "@/types/nezha-api"
 type AssetSummaryWidgetProps = {
   now: number
   servers: NezhaServer[]
+  open?: boolean
+  onClose?: () => void
 }
 
 type BillingData = NonNullable<NonNullable<ReturnType<typeof parsePublicNote>>["billingDataMod"]>
@@ -349,8 +351,10 @@ function FinanceRow({ label, value, accentClass }: { label: string; value: strin
   )
 }
 
-export default function AssetSummaryWidget({ now, servers }: AssetSummaryWidgetProps) {
-  const [open, setOpen] = useState(false)
+export default function AssetSummaryWidget({ now, servers, open: openProp, onClose }: AssetSummaryWidgetProps) {
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isOpen = openProp !== undefined ? openProp : internalOpen
+  const handleClose = onClose || (() => setInternalOpen(false))
   const [refreshKey, setRefreshKey] = useState(0)
   const [targetCurrency, setTargetCurrency] = useState(getInitialCurrency)
   const [sortBy, setSortBy] = useState<AssetSort>((localStorage.getItem("asset_card_sort") as AssetSort) || "weight_asc")
@@ -423,23 +427,10 @@ export default function AssetSummaryWidget({ now, servers }: AssetSummaryWidgetP
 
   return (
     <>
-      <button
-        type="button"
-        aria-label="打开资产统计"
-        className={cn(
-          "fixed right-5 top-[70px] z-[1041] flex size-11 items-center justify-center rounded-full border border-border bg-card/85 shadow-lg backdrop-blur-xl transition max-[576px]:right-4",
-          palette.triggerText,
-          open ? "pointer-events-none scale-0 opacity-0" : "scale-100 opacity-100 hover:scale-105",
-        )}
-        onClick={() => setOpen(true)}
-      >
-        <CircleDollarSign className="size-6" />
-      </button>
-
       <section
         className={cn(
           "fixed right-5 top-[70px] z-[1040] flex w-[280px] max-w-[calc(100vw-40px)] flex-col rounded-2xl border border-border bg-card/90 text-card-foreground shadow-2xl backdrop-blur-xl transition max-[576px]:right-5 max-[576px]:w-[calc(100vw-40px)]",
-          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0",
+          isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0",
         )}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3">
@@ -447,7 +438,7 @@ export default function AssetSummaryWidget({ now, servers }: AssetSummaryWidgetP
             <CircleDollarSign className="size-4" />
             资产统计
           </h3>
-          <button type="button" aria-label="关闭资产统计" className={cn("rounded-full p-1 text-muted-foreground transition", palette.hoverPrimary)} onClick={() => setOpen(false)}>
+          <button type="button" aria-label="关闭资产统计" className={cn("rounded-full p-1 text-muted-foreground transition", palette.hoverPrimary)} onClick={handleClose}>
             <X className="size-4" />
           </button>
         </div>

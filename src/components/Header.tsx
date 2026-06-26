@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import NumberFlow, { NumberFlowGroup } from "@number-flow/react"
 import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, m } from "framer-motion"
-import { ImageMinus, Settings, CircleDollarSign } from "lucide-react"
+import { CircleDollarSign, ImageMinus, Settings } from "lucide-react"
 import { DateTime } from "luxon"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -19,11 +19,6 @@ import { SearchButton } from "./SearchButton"
 import { LoadingSpinner } from "./loading/Loader"
 import AssetSummaryWidget from "./AssetSummaryWidget"
 import { Button } from "./ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
 
 function Header() {
   const { t } = useTranslation()
@@ -57,17 +52,11 @@ function Header() {
     document.getElementsByTagName("head")[0].appendChild(link)
   }, [customLogo])
 
-  // useEffect(() => {
-  //   document.title = siteName || "哪吒监控 Nezha Monitoring"
-  // }, [siteName])
-
   const handleBackgroundToggle = () => {
     if (window.CustomBackgroundImage) {
-      // Store the current background image before removing it
       sessionStorage.setItem("savedBackgroundImage", window.CustomBackgroundImage)
       updateBackground(undefined)
     } else {
-      // Restore the saved background image
       const savedImage = sessionStorage.getItem("savedBackgroundImage")
       if (savedImage) {
         updateBackground(savedImage)
@@ -79,6 +68,8 @@ function Header() {
 
   const { lastMessage } = useWebSocketContext()
   const showAssetButton = (window as unknown as Record<string, unknown>).ShowAssetButton !== false
+  const [assetOpen, setAssetOpen] = useState(false)
+  const wsData = lastMessage ? JSON.parse(lastMessage.data) : null
 
   return (
     <div className="mx-auto w-full max-w-5xl">
@@ -123,27 +114,21 @@ function Header() {
               <ImageMinus className="w-4 h-4" />
             </Button>
           )}
-          {showAssetButton && lastMessage && (() => {
-            const wsData = JSON.parse(lastMessage.data)
-            return (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={cn("rounded-full px-[9px] bg-white dark:bg-black", {
-                      "bg-white/70 dark:bg-black/70": customBackgroundImage,
-                    })}
-                  >
-                    <CircleDollarSign className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" sideOffset={8} className="max-h-[70vh] overflow-y-auto">
-                  <AssetSummaryWidget now={wsData.now} servers={wsData.servers} />
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )
-          })()}
+          {showAssetButton && wsData && (
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                className={cn("rounded-full px-[9px] bg-white dark:bg-black", {
+                  "bg-white/70 dark:bg-black/70": customBackgroundImage,
+                })}
+                onClick={() => setAssetOpen(true)}
+              >
+                <CircleDollarSign className="w-4 h-4" />
+              </Button>
+              <AssetSummaryWidget now={wsData.now} servers={wsData.servers} open={assetOpen} onClose={() => setAssetOpen(false)} />
+            </>
+          )}
           <a href="/admin" target="_blank">
             <Button
               variant="outline"
