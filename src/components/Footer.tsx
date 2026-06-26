@@ -10,13 +10,13 @@ const Footer: React.FC = () => {
   return (
     <footer className="mx-auto w-full max-w-5xl px-4 lg:px-0 pb-4 mt-[10px] server-footer">
       <section className="flex flex-col">
-        <section className="mt-1 flex items-center sm:flex-row flex-col justify-between gap-2 text-[13px] font-light tracking-tight text-neutral-600/70 dark:text-neutral-300/50 server-footer-name">
+        <section className="mt-1 flex items-center sm:flex-row flex-col justify-between gap-2 text-[13px] font-light tracking-tight text-neutral-800 dark:text-neutral-300/50 server-footer-name">
           <div className="flex flex-col items-start gap-1">
             <p>Powered by <a href={"https://github.com/komari-monitor/komari"} target="_blank">Komari Monitor</a></p>
             <p>2026 Modify by <a href={modifyUrl} target="_blank">{modifyName}</a></p>
           </div>
           <div className="server-footer-theme flex flex-col items-center sm:items-end">
-            <p className="mt-1 text-[13px] font-light tracking-tight text-neutral-600/70 dark:text-neutral-300/50">
+            <p className="mt-1 text-[13px] font-light tracking-tight text-neutral-800 dark:text-neutral-300/50">
               <kbd className="pointer-events-none mx-1 inline-flex h-4 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                 {isMac ? <span className="text-xs">⌘</span> : "Ctrl "}K
               </kbd>

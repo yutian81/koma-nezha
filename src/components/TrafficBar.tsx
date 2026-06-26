@@ -30,7 +30,7 @@ export default function TrafficBar({ used, limit, expiredAt: _expiredAt, limitTy
       <span className="text-xs font-medium text-neutral-800 dark:text-neutral-200 whitespace-nowrap">
         {textContent}
       </span>
-      <div className="relative flex-1 h-[3.5px] -mt-[2px]">
+      <div className="relative flex-1 h-[3.5px] -mt-[4px]">
         <div className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-full" />
         <div
           className="absolute inset-0 rounded-full transition-all duration-300"

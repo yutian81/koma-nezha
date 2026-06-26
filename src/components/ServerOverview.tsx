@@ -41,7 +41,7 @@ export default function ServerOverview({ online, offline, total, up, down, upSpe
         >
           <CardContent className="flex h-full items-center px-6 py-3">
             <section className="flex flex-col gap-1">
-              <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><Server className="size-4" />{t("serverOverview.totalServers")}</p>
+              <p className="text-sm font-medium md:text-base flex items-center gap-1.5"><Server className="size-4 text-blue-500" />{t("serverOverview.totalServers")}</p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>

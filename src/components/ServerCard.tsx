@@ -8,6 +8,7 @@ import { NezhaServer } from "@/types/nezha-api"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
+import { XCircle } from "lucide-react"
 import PlanInfo from "./PlanInfo"
 import BillingInfo from "./billingInfo"
 import { Badge } from "./ui/badge"
@@ -193,7 +194,7 @@ export default function ServerCard({ now, serverInfo }: { now: number; serverInf
         </div>
       </section>
       <div className="mb-2 flex flex-col items-start gap-1 w-full lg:w-auto">
-        <span className="text-sm font-bold text-red-500">服务器已离线</span>
+        <span className="flex items-center gap-1.5 text-sm font-bold text-red-500"><XCircle className="size-4" />服务器已离线</span>
           {parsedData?.planDataMod && <PlanInfo parsedData={parsedData} />}
       </div>
     </Card>
