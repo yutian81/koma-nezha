@@ -26,11 +26,11 @@ export default function TrafficBar({ used, limit, expiredAt: _expiredAt, limitTy
   const textContent = `${usedFormatted} / ${limitFormatted}${showPercent ? ` / ${percentStr}%` : ""}`
 
   return (
-    <div className="flex items-center gap-2 w-full">
+    <div className="flex items-end gap-2 w-full">
       <span className="text-xs font-medium text-neutral-800 dark:text-neutral-200 whitespace-nowrap">
         {textContent}
       </span>
-      <div className="relative flex-1 h-[1.8px]">
+      <div className="relative flex-1 h-[2.5px]">
         <div className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-full" />
         <div
           className="absolute inset-0 rounded-full transition-all duration-300"
